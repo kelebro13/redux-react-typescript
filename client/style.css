@@ -1,0 +1,27 @@
+li {
+    list-style-type: none;
+}
+
+li:hover {
+    background-color: lightgray;
+}
+
+input {
+    width: 100%;
+}
+.select {
+    width: 300px;
+    height: 23px;
+    border: 1px solid grey;
+}
+
+.selectOption {
+    height: 100%;
+    width: 300px;
+    border: 1px solid grey;
+}
+
+.option {
+    padding: 5px;
+    border-bottom: 1px solid lightgray;
+}
