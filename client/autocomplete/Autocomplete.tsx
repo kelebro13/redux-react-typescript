@@ -57,25 +57,25 @@ class Autocomplete extends React.Component<IAutocompleteProps, IAutocompleteStat
     }
 
     /**
-     * Рендеринг найденных юзеров на GitHub
+     * Рендеринг найденных юзеров.
      */
     renderOptions() {
         const {options, isLoading} = this.props;
         let template;
         if (isLoading) {
-            template = <p>Loading...</p>
+            template = <li>Loading...</li>
         } else if (options && options.length) {
             template = options.map((item: IUser, index: number) => {
                 return <li className="option" key={index} value={item.username}
                            onClick={this.handleSelect.bind(this, item)}>{item.username}</li>
             })
         } else {
-            template = <p>Нет данных</p>
+            template = <li>Нет данных</li>
         }
         return (
-            <div className="selectOption">
+            <ul className="selectOption">
                 {template}
-            </div>
+            </ul>
         );
     }
 
@@ -97,7 +97,9 @@ class Autocomplete extends React.Component<IAutocompleteProps, IAutocompleteStat
 
 const mapStateToProps = (state) => {
     return {
-        ...state
+        options: state.options,
+        isLoading: state.isLoading,
+        user: state.user
     };
 };
 

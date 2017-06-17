@@ -11,8 +11,6 @@ const initialState: IStore = {
 
 /**
  * Редюсер.
- * @param state
- * @param action
  */
 const reducer = (state: IStore = initialState, action: IAction) => {
     switch (action.type) {
