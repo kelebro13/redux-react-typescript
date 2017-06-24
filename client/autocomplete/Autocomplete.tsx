@@ -1,19 +1,18 @@
 import * as React from 'react';
 import {connect} from 'react-redux';
-import {bindActionCreators} from 'redux';
-import actions from './actions';
 import {IAutocompleteProps, IAutocompleteState, IUser} from './Models';
+import {AutocompleteActions} from "./AutocompleteActions";
 
 /**
  * Компонент выбора юзеров с автопоиском.
  */
-class Autocomplete extends React.Component<IAutocompleteProps, IAutocompleteState> {
+class AutocompleteComponent extends React.Component<IAutocompleteProps, IAutocompleteState> {
 
     constructor(props) {
         super(props);
         this.state = {
             searchUser: '',
-            isSelecting: false,
+            isShowOptions: false,
         };
     }
 
@@ -24,9 +23,12 @@ class Autocomplete extends React.Component<IAutocompleteProps, IAutocompleteStat
         });
     }
 
+    /**
+     * Обработчик показа списка пользователей.
+     */
     toggleShowOptions = () => {
         this.setState({
-            isSelecting: !this.state.isSelecting
+            isShowOptions: !this.state.isShowOptions
         })
     };
 
@@ -80,7 +82,7 @@ class Autocomplete extends React.Component<IAutocompleteProps, IAutocompleteStat
     }
 
     render() {
-        const {searchUser, isSelecting} = this.state;
+        const {searchUser, isShowOptions} = this.state;
         return (
             <div
                 onClick={this.toggleShowOptions}
@@ -89,7 +91,7 @@ class Autocomplete extends React.Component<IAutocompleteProps, IAutocompleteStat
                     className="select"
                     onChange={this.handleChangeOption}
                     value={searchUser}/>
-                {isSelecting && this.renderOptions()}
+                {isShowOptions && this.renderOptions()}
             </div>
         );
     }
@@ -105,8 +107,9 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        actions: bindActionCreators(actions, dispatch)
+        actions: new AutocompleteActions(dispatch)
     };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Autocomplete);
+const Autocomplete = connect(mapStateToProps, mapDispatchToProps)(AutocompleteComponent as any);
+export {Autocomplete};

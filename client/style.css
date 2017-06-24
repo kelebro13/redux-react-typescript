@@ -16,6 +16,8 @@ input {
 }
 
 .selectOption {
+    padding-left: 0px;
+    margin-top: 0px;
     height: 100%;
     width: 300px;
     border: 1px solid grey;

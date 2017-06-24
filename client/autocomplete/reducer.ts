@@ -1,4 +1,4 @@
-import {IStore, IAction} from './Models';
+import {IStore, IFluxStandartAction} from './Models';
 
 /**
  * Начальное состояние Redux-хранилища.
@@ -12,7 +12,7 @@ const initialState: IStore = {
 /**
  * Редюсер.
  */
-const reducer = (state: IStore = initialState, action: IAction) => {
+const reducer = (state: IStore = initialState, action: IFluxStandartAction) => {
     switch (action.type) {
         case 'GET_USER_REQUEST':
             return {
@@ -29,10 +29,10 @@ const reducer = (state: IStore = initialState, action: IAction) => {
             return {
                 ...state,
                 user: action.payload
-            }
+            };
         default:
             return state;
     }
 };
 
-export {IAction, initialState, reducer};
+export {initialState, reducer};
